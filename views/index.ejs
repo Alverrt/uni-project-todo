@@ -1,0 +1,14 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>helo</title>
+</head>
+<body>
+    <h1>oldu mu knk  </h1>
+    <% if (user) { %>
+        <h2><%= user.foo %></h2>
+        <%- include('./deneme', {user: user}); %>
+      <% } %>
+</body>
+</html>

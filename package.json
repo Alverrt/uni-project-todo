@@ -1,0 +1,28 @@
+{
+  "name": "uni-project-todo",
+  "version": "1.0.0",
+  "description": "TODO nodejs project for school homework.",
+  "main": "index.js",
+  "dependencies": {
+    "bootstrap": "^4.5.3",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "jquery": "^3.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alverrt/uni-project-todo.git"
+  },
+  "author": "Alverrt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alverrt/uni-project-todo/issues"
+  },
+  "homepage": "https://github.com/Alverrt/uni-project-todo#readme"
+}
