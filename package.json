@@ -4,7 +4,6 @@
   "description": "TODO nodejs project for school homework.",
   "main": "index.js",
   "dependencies": {
-    "bootstrap": "^4.5.3",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "jquery": "^3.5.1"
