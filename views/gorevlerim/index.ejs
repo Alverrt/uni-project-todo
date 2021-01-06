@@ -1,0 +1,95 @@
+<html lang="en">
+
+<head>
+    <%- include('../head.ejs') %>
+        <link rel="stylesheet" href="style/gorevlerim.css">
+</head>
+
+<body>
+    <%- include('../navbar.ejs') %>
+        <div class="container-fluid row mt-2">
+            <div class="col-lg-4">
+                <h3 class="text-center my-4">Bekleyen Görevler</h3>
+                <% gorevJSON.forEach(element=> {
+                    if (element.gorevDurumu === 'bekleyen') {
+
+                    %>
+                    <div class="card text-white bg-primary mb-3 shadow-lg">
+                        <div class="card-header">
+                            <%= element.gorevID %>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= element.baslik %>
+                            </h5>
+                            <p class="card-text">
+                                <%= element.aciklama %>
+                            </p>
+                            <hr>
+                            <p class="m-0">Görev Veriliş Tarihi: <%= element.gorevBaslangic %>
+                            </p>
+                            <p class="m-0">Görev Teslim Tarihi: <%= element.gorevBitis %>
+                            </p>
+                        </div>
+                    </div>
+
+                    <% }}) %>
+            </div>
+            <div class="col-lg-4">
+                <h3 class="text-center my-4">Devam Eden Görevler</h3>
+                <% gorevJSON.forEach(element=> {
+                    if (element.gorevDurumu === 'devamEden') {
+
+                    %>
+                    <div class="card text-white bg-warning mb-3 shadow-lg">
+                        <div class="card-header">
+                            <%= element.gorevID %>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= element.baslik %>
+                            </h5>
+                            <p class="card-text">
+                                <%= element.aciklama %>
+                            </p>
+                            <hr>
+                            <p class="m-0">Görev Veriliş Tarihi: <%= element.gorevBaslangic %>
+                            </p>
+                            <p class="m-0">Görev Teslim Tarihi: <%= element.gorevBitis %>
+                            </p>
+                        </div>
+                    </div>
+
+                    <% }}) %>
+            </div>
+            <div class="col-lg-4">
+                <h3 class="text-center my-4">Tamamlanan Görevler</h3>
+                <% gorevJSON.forEach(element=> {
+                    if (element.gorevDurumu === 'tamamlanan') {
+
+                    %>
+                    <div class="card text-white bg-success mb-3 shadow-lg">
+                        <div class="card-header">
+                            <%= element.gorevID %>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= element.baslik %>
+                            </h5>
+                            <p class="card-text">
+                                <%= element.aciklama %>
+                            </p>
+                            <hr>
+                            <p class="m-0">Görev Veriliş Tarihi: <%= element.gorevBaslangic %>
+                            </p>
+                            <p class="m-0">Görev Teslim Tarihi: <%= element.gorevBitis %>
+                            </p>
+                        </div>
+                    </div>
+
+                    <% }}) %>
+            </div>
+        </div>
+</body>
+
+</html>
