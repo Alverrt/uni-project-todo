@@ -47,7 +47,7 @@ const ahmetGorevleri = [
     aciklama: 'Sunucunun backend tarafındaki buglarının anazlizinin yapılması.',
     gorevBaslangic: new Date(2021, 01, 01).toLocaleDateString('tr'),
     gorevBitis: new Date(2021, 01, 03).toLocaleDateString('tr'),
-    gorevDurumu: 'devamEden'
+    gorevDurumu: 'bekleyen'
   },
   {
     gorevID: '#456',
@@ -56,7 +56,7 @@ const ahmetGorevleri = [
     aciklama: 'Kullanıcıya bakan UI tarafının yeni trendlere uygun olarak yeniden geliştirilmesi.',
     gorevBaslangic: new Date(2021, 01, 02).toLocaleDateString('tr'),
     gorevBitis: new Date(2021, 01, 10).toLocaleDateString('tr'),
-    gorevDurumu: 'devamEden'
+    gorevDurumu: 'bekleyen'
   }
 ]
 

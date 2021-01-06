@@ -1,20 +1,20 @@
 <html lang="en">
 
 <head>
-    <%- include('../head.ejs') %>
+    <%- include('../utils/head.ejs') %>
         <link rel="stylesheet" href="style/gorevlerim.css">
 </head>
 
 <body>
     <%- include('../navbar.ejs') %>
         <div class="container-fluid row mt-2">
-            <div class="col-lg-4">
+            <div id="beklemede" class="col-lg-4">
                 <h3 class="text-center my-4">Bekleyen Görevler</h3>
                 <% gorevJSON.forEach(element=> {
                     if (element.gorevDurumu === 'bekleyen') {
 
                     %>
-                    <div class="card text-white bg-primary mb-3 shadow-lg">
+                    <div draggable="true" ondragstart="dragStart()" ondragend="dragEnd()" class="card text-white bg-primary mb-3 shadow-lg">
                         <div class="card-header">
                             <%= element.gorevID %>
                         </div>
@@ -34,8 +34,9 @@
                     </div>
 
                     <% }}) %>
+                    <div class="dragCover" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)"></div>
             </div>
-            <div class="col-lg-4">
+            <div id="devamEden" class="col-lg-4">
                 <h3 class="text-center my-4">Devam Eden Görevler</h3>
                 <% gorevJSON.forEach(element=> {
                     if (element.gorevDurumu === 'devamEden') {
@@ -61,8 +62,9 @@
                     </div>
 
                     <% }}) %>
+                    <div class="dragCover" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)"></div>
             </div>
-            <div class="col-lg-4">
+            <div id="tamamlanan" class="col-lg-4">
                 <h3 class="text-center my-4">Tamamlanan Görevler</h3>
                 <% gorevJSON.forEach(element=> {
                     if (element.gorevDurumu === 'tamamlanan') {
@@ -88,8 +90,11 @@
                     </div>
 
                     <% }}) %>
+                    <div class="dragCover" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)"></div>
             </div>
         </div>
+        <%- include('../utils/jquery.ejs') %>
+        <script src="js/dragAndDrop.js"></script>
 </body>
 
 </html>
