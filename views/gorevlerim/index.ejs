@@ -14,7 +14,7 @@
                     if (element.gorevDurumu === 'bekleyen') {
 
                     %>
-                    <div draggable="true" ondragstart="dragStart()" ondragend="dragEnd()" class="card text-white bg-primary mb-3 shadow-lg">
+                    <div draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd()" class="card text-white bg-primary mb-3 shadow-lg">
                         <div class="card-header">
                             <%= element.gorevID %>
                         </div>
@@ -34,7 +34,7 @@
                     </div>
 
                     <% }}) %>
-                    <div class="dragCover" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)"></div>
+                    <div class="dragCover" ondragenter="dragEnter(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)" ondrop="dropped(event)"></div>
             </div>
             <div id="devamEden" class="col-lg-4">
                 <h3 class="text-center my-4">Devam Eden Görevler</h3>
@@ -62,7 +62,7 @@
                     </div>
 
                     <% }}) %>
-                    <div class="dragCover" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)"></div>
+                    <div class="dragCover" ondragenter="dragEnter(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)" ondrop="dropped(event)"></div>
             </div>
             <div id="tamamlanan" class="col-lg-4">
                 <h3 class="text-center my-4">Tamamlanan Görevler</h3>
@@ -90,7 +90,7 @@
                     </div>
 
                     <% }}) %>
-                    <div class="dragCover" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)"></div>
+                    <div class="dragCover" ondragenter="dragEnter(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)" ondrop="dropped(event)"></div>
             </div>
         </div>
         <%- include('../utils/jquery.ejs') %>

@@ -3,12 +3,14 @@ var devamEdenBolumu = $('#devamEden');
 var tamamlananBolumu = $('#tamamlanan');
 var dragCover = $('.dragCover');
 
+var draggedElement;
 
-function dragStart() {
+function dragStart(event) {
     bekleyenBolumu.css('position', 'relative');
     devamEdenBolumu.css('position', 'relative');
     tamamlananBolumu.css('position', 'relative');
     dragCover.css('display', 'block');
+    draggedElement = event.target;
 }
 
 function dragEnd() {
@@ -22,6 +24,14 @@ function dragEnter(event) {
     event.target.style.backgroundColor = 'rgba(66, 126, 245, .6)';
 }
 
+function allowDrop(event) {
+    event.preventDefault();
+}
+
 function dragLeave(event) {
     event.target.style.backgroundColor = 'rgba(66, 126, 245, .3)';
+}
+
+function dropped(event) {
+    console.log(event.target);
 }
