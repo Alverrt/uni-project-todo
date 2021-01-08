@@ -165,7 +165,7 @@ const gorevEkle = (session, gorev) => {
       ahmetGorevleri.push(
         {
           user: session,
-          gorevID: getRandomID(),
+          gorevID: '#' + getRandomID(),
           gorevKategori: gorev.kategori,
           baslik: gorev.baslik,
           aciklama: gorev.aciklama,
@@ -179,7 +179,7 @@ const gorevEkle = (session, gorev) => {
       mehmetGorevleri.push(
         {
           user: session,
-          gorevID: getRandomID(),
+          gorevID: '#' + getRandomID(),
           gorevKategori: gorev.kategori,
           baslik: gorev.baslik,
           aciklama: gorev.aciklama,
@@ -193,7 +193,7 @@ const gorevEkle = (session, gorev) => {
       zeynepGorevleri.push(
         {
           user: session,
-          gorevID: getRandomID(),
+          gorevID: '#' + getRandomID(),
           gorevKategori: gorev.kategori,
           baslik: gorev.baslik,
           aciklama: gorev.aciklama,
@@ -209,9 +209,18 @@ const gorevEkle = (session, gorev) => {
   }
 }
 
+// Tarih htmlin kendi datepickerinden alınıyor. Ama html tarihi tr standartlarına göre almıyor. Onu fixleyen fonksiyon.
+const fixDate = (date) => {
+  let dateArray = date.split('-')
+  dateArray.reverse()
+  let fixedDate = dateArray.join('.')
+  return fixedDate
+}
+
 const session = []
 
 app.get('/', (req, res) => {
+  session.pop()
   res.render('index')
 })
 
@@ -222,7 +231,7 @@ app.post('/login', function (req, res) {
     session.pop()
     session.push(gorevJSON[0].user)
   } else {
-    res.send('noluoz yanlis girdin')
+    res.send('buraya hata mesaji gelecek')
   }
 })
 app.post('/update', function (req, res) {
@@ -230,7 +239,13 @@ app.post('/update', function (req, res) {
 })
 
 app.post('/gorevekle', (req, res) => {
-  gorevEkle(session, req.body)
+  console.log(req.body.baslangic)
+  req.body.baslangic = fixDate(req.body.baslangic)
+  req.body.bitis = fixDate(req.body.bitis)
+  gorevEkle(session[0], req.body)
+  let lowercase = session[0].toLowerCase()
+  const gorevJSON = gorevler(lowercase)
+  res.render('./gorevlerim/index.ejs', { gorevJSON })
 })
 
 app.listen(port, () => {
