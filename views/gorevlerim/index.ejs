@@ -6,6 +6,64 @@
 </head>
 
 <body>
+    <!-- GOREV EKLE BOLUMU BASLADI -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Yeni Görev Ekle</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/gorevekle" id="gorevForm">
+                        <div class="mb-2">
+                            <label for="recipient-name" class="col-form-label">Görev Başlığı:</label>
+                            <input type="text" name="baslik" class="form-control" id="gorevBaslik">
+                        </div>
+                        <div class="mb-2">
+                            <label for="recipient-name" class="col-form-label">Görev Kategorisi:</label>
+                            <select class="form-select" name="kategori" aria-label="Default select example">
+                                <option value="analiz">Analiz</option>
+                                <option value="tasarim">Tasarım</option>
+                                <option value="kodlama">Kodlama</option>
+                                <option value="test">Test</option>
+                              </select>
+                        </div>
+                        <div class="mb-2">
+                            <label for="recipient-name" class="col-form-label">Görev Açıklaması:</label>
+                            <textarea class="form-control" name="aciklama" id="gorevAciklamasi"></textarea>
+                        </div>
+                        <div class="mb-2">
+                            <label for="recipient-name" class="col-form-label">Görev Başlangıç Tarihi:</label>
+                            <input type="text" name="baslangic" class="form-control" id="gorevBaslangic">
+                        </div>
+                        <div class="mb-2">
+                            <label for="message-text" class="col-form-label">Görev Bitiş Tarihi:</label>
+                            <input type="text" name="bitis" class="form-control" id="gorevBitis"></input>
+                        </div>
+                        <div class="mb-2">
+                            <label for="message-text" class="col-form-label">Görev Durumu:</label>
+                            <select class="form-select" name="durum" aria-label="Default select example">
+                                <option value="beklemede">Beklemede</option>
+                                <option value="devamEden">Devam Ediyor</option>
+                                <option value="tamamlanan">Tamamlandı</option>
+                              </select>
+                        </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                    <button type="button" onclick="submitAndClear()" class="btn btn-primary">Yeni Gorev Ekle</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- GOREV EKLE BOLUMU BITTI -->
     <%- include('../navbar.ejs', { user: gorevJSON[0].user }) %>
         <div class="container-fluid row mt-2">
             <div id="beklemede" class="col-lg-4">
@@ -14,7 +72,8 @@
                     if (element.gorevDurumu === 'bekleyen') {
 
                     %>
-                    <div id="<%= element.gorevID %>" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd()" class="card text-white bg-primary mb-3 shadow-lg">
+                    <div id="<%= element.gorevID %>" draggable="true" ondragstart="dragStart(event)"
+                        ondragend="dragEnd()" class="card text-white bg-primary mb-3 shadow-lg">
                         <div class="card-header">
                             <%= element.gorevID %>
                         </div>
@@ -34,7 +93,8 @@
                     </div>
 
                     <% }}) %>
-                    <div class="dragCover" ondragenter="dragEnter(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)" ondrop="dropped(event)"></div>
+                        <div class="dragCover" ondragenter="dragEnter(event)" ondragover="allowDrop(event)"
+                            ondragleave="dragLeave(event)" ondrop="dropped(event)"></div>
             </div>
             <div id="devamEden" class="col-lg-4">
                 <h3 class="text-center my-4">Devam Eden Görevler</h3>
@@ -42,7 +102,8 @@
                     if (element.gorevDurumu === 'devamEden') {
 
                     %>
-                    <div id="<%= element.gorevID %>" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd()" class="card text-white bg-warning mb-3 shadow-lg">
+                    <div id="<%= element.gorevID %>" draggable="true" ondragstart="dragStart(event)"
+                        ondragend="dragEnd()" class="card text-white bg-warning mb-3 shadow-lg">
                         <div class="card-header">
                             <%= element.gorevID %>
                         </div>
@@ -62,7 +123,8 @@
                     </div>
 
                     <% }}) %>
-                    <div class="dragCover" ondragenter="dragEnter(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)" ondrop="dropped(event)"></div>
+                        <div class="dragCover" ondragenter="dragEnter(event)" ondragover="allowDrop(event)"
+                            ondragleave="dragLeave(event)" ondrop="dropped(event)"></div>
             </div>
             <div id="tamamlanan" class="col-lg-4">
                 <h3 class="text-center my-4">Tamamlanan Görevler</h3>
@@ -70,7 +132,8 @@
                     if (element.gorevDurumu === 'tamamlanan') {
 
                     %>
-                    <div id="<%= element.gorevID %>" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd()" class="card text-white bg-success mb-3 shadow-lg">
+                    <div id="<%= element.gorevID %>" draggable="true" ondragstart="dragStart(event)"
+                        ondragend="dragEnd()" class="card text-white bg-success mb-3 shadow-lg">
                         <div class="card-header">
                             <%= element.gorevID %>
                         </div>
@@ -90,11 +153,12 @@
                     </div>
 
                     <% }}) %>
-                    <div class="dragCover" ondragenter="dragEnter(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)" ondrop="dropped(event)"></div>
+                        <div class="dragCover" ondragenter="dragEnter(event)" ondragover="allowDrop(event)"
+                            ondragleave="dragLeave(event)" ondrop="dropped(event)"></div>
             </div>
         </div>
         <%- include('../utils/jquery.ejs') %>
-        <script src="js/dragAndDrop.js"></script>
+            <script src="js/dragAndDrop.js"></script>
 </body>
 
 </html>

@@ -136,18 +136,72 @@ function updateStatus(username, status, gorevID) {
       })
       break;
     case "Mehmet":
-    mehmetGorevleri.forEach((element) => {
-      if (element.gorevID === gorevID) {
-        element.gorevDurumu = status
-      }
-    })
+      mehmetGorevleri.forEach((element) => {
+        if (element.gorevID === gorevID) {
+          element.gorevDurumu = status
+        }
+      })
       break;
     case "Zeynep":
-    zeynepGorevleri.forEach((element) => {
-      if (element.gorevID === gorevID) {
-        element.gorevDurumu = status
-      }
-    })
+      zeynepGorevleri.forEach((element) => {
+        if (element.gorevID === gorevID) {
+          element.gorevDurumu = status
+        }
+      })
+      break;
+
+    default:
+      break;
+  }
+}
+
+const getRandomID = (min = 200, max = 900) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+const gorevEkle = (session, gorev) => {
+  switch (session) {
+    case 'Ahmet':
+      ahmetGorevleri.push(
+        {
+          user: session,
+          gorevID: getRandomID(),
+          gorevKategori: gorev.kategori,
+          baslik: gorev.baslik,
+          aciklama: gorev.aciklama,
+          gorevBaslangic: gorev.baslangic,
+          gorevBitis: gorev.bitis,
+          gorevDurumu: gorev.durum
+        }
+      )
+      break;
+    case 'Mehmet':
+      mehmetGorevleri.push(
+        {
+          user: session,
+          gorevID: getRandomID(),
+          gorevKategori: gorev.kategori,
+          baslik: gorev.baslik,
+          aciklama: gorev.aciklama,
+          gorevBaslangic: gorev.baslangic,
+          gorevBitis: gorev.bitis,
+          gorevDurumu: gorev.durum
+        }
+      )
+      break;
+    case 'Zeynep':
+      zeynepGorevleri.push(
+        {
+          user: session,
+          gorevID: getRandomID(),
+          gorevKategori: gorev.kategori,
+          baslik: gorev.baslik,
+          aciklama: gorev.aciklama,
+          gorevBaslangic: gorev.baslangic,
+          gorevBitis: gorev.bitis,
+          gorevDurumu: gorev.durum
+        }
+      )
       break;
 
     default:
@@ -173,6 +227,10 @@ app.post('/login', function (req, res) {
 })
 app.post('/update', function (req, res) {
   updateStatus(session[0], req.body.status, req.body.gorevID)
+})
+
+app.post('/gorevekle', (req, res) => {
+  gorevEkle(session, req.body)
 })
 
 app.listen(port, () => {

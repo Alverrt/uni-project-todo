@@ -6,6 +6,16 @@ var dragCover = $('.dragCover');
 var draggedElement;
 var IDofParent;
 
+async function submitAndClear() {
+
+    $('#gorevForm').submit()
+
+    $('#gorevBaslik').val(' ')
+    $('#gorevAciklamasi').val(' ')
+    $('#gorevBaslangic').val(' ')
+    $('#gorevBitis').val(' ')
+}
+
 function changeColor(statusID, element) {
     switch (statusID) {
         case 'beklemede':
