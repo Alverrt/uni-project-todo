@@ -23,6 +23,14 @@ function changeColor(statusID, element) {
     }
 }
 
+function updateStatus(status, gorevID) {
+    $.post("/update",
+  {
+    status: status,
+    gorevID: gorevID
+  });
+}
+
 function deleteColor(el) {
     for (let i = el.classList.length - 1; i >= 0; i--) {
         const className = el.classList[i];
@@ -30,6 +38,11 @@ function deleteColor(el) {
             el.classList.remove(className);
         }
     }
+}
+
+function getGorevID(element) {
+    var ID = $(element).attr("id");
+    return ID;
 }
 
 function dragStart(event) {
@@ -63,5 +76,7 @@ function dropped(event) {
     event.target.before(draggedElement);
     deleteColor(draggedElement);
     IDofParent = $(event.target).parent().attr("id")
+    var gorevID = getGorevID(draggedElement)
     changeColor(IDofParent, draggedElement);
+    updateStatus(IDofParent, gorevID);
 }

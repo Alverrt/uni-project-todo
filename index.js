@@ -41,6 +41,7 @@ const authenticate = (body) => {
 
 const ahmetGorevleri = [
   {
+    user: 'Ahmet',
     gorevID: '#432',
     gorevKategori: 'Analiz',
     baslik: 'Backend\'de Bug Analizi',
@@ -50,6 +51,7 @@ const ahmetGorevleri = [
     gorevDurumu: 'bekleyen'
   },
   {
+    user: 'Ahmet',
     gorevID: '#456',
     gorevKategori: 'Geliştirme',
     baslik: 'Grafik Arayüzünün Geliştirilmesi',
@@ -62,6 +64,7 @@ const ahmetGorevleri = [
 
 const mehmetGorevleri = [
   {
+    user: 'Mehmet',
     gorevID: '#443',
     gorevKategori: 'Analiz',
     baslik: 'Mobil Arayüz Analizi',
@@ -71,6 +74,7 @@ const mehmetGorevleri = [
     gorevDurumu: 'bekleyen'
   },
   {
+    user: 'Mehmet',
     gorevID: '#466',
     gorevKategori: 'Analiz',
     baslik: 'Raporlanan Bugların Düzeltilmesi',
@@ -83,6 +87,7 @@ const mehmetGorevleri = [
 
 const zeynepGorevleri = [
   {
+    user: 'Zeynep',
     gorevID: '#410',
     gorevKategori: 'Test',
     baslik: 'Mobil UI Testleri',
@@ -92,6 +97,7 @@ const zeynepGorevleri = [
     gorevDurumu: 'bekleyen'
   },
   {
+    user: 'Zeynep',
     gorevID: '#498',
     gorevKategori: 'Test',
     baslik: 'Backend Yük Testi',
@@ -105,20 +111,51 @@ const zeynepGorevleri = [
 const gorevler = (kullanici) => {
   switch (kullanici) {
     case 'ahmet':
-    return ahmetGorevleri;
+      return ahmetGorevleri;
       break;
     case 'mehmet':
-    return mehmetGorevleri;
+      return mehmetGorevleri;
       break;
     case 'zeynep':
-    return zeynepGorevleri;
+      return zeynepGorevleri;
       break;
 
     default:
-    throw new Error('Kullanici adi alinamadi.');
+      throw new Error('Kullanici adi alinamadi.');
       break;
   }
 }
+
+function updateStatus(username, status, gorevID) {
+  switch (username) {
+    case "Ahmet":
+      ahmetGorevleri.forEach((element) => {
+        if (element.gorevID === gorevID) {
+          element.gorevDurumu = status
+        }
+      })
+      break;
+    case "Mehmet":
+    mehmetGorevleri.forEach((element) => {
+      if (element.gorevID === gorevID) {
+        element.gorevDurumu = status
+      }
+    })
+      break;
+    case "Zeynep":
+    zeynepGorevleri.forEach((element) => {
+      if (element.gorevID === gorevID) {
+        element.gorevDurumu = status
+      }
+    })
+      break;
+
+    default:
+      break;
+  }
+}
+
+const session = []
 
 app.get('/', (req, res) => {
   res.render('index')
@@ -127,10 +164,15 @@ app.get('/', (req, res) => {
 app.post('/login', function (req, res) {
   if (authenticate(req.body)) {
     const gorevJSON = gorevler(req.body.username)
-    res.render('./gorevlerim/index.ejs',{ gorevJSON })
+    res.render('./gorevlerim/index.ejs', { gorevJSON })
+    session.pop()
+    session.push(gorevJSON[0].user)
   } else {
     res.send('noluoz yanlis girdin')
   }
+})
+app.post('/update', function (req, res) {
+  updateStatus(session[0], req.body.status, req.body.gorevID)
 })
 
 app.listen(port, () => {

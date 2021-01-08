@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    <%- include('../navbar.ejs') %>
+    <%- include('../navbar.ejs', { user: gorevJSON[0].user }) %>
         <div class="container-fluid row mt-2">
             <div id="beklemede" class="col-lg-4">
                 <h3 class="text-center my-4">Bekleyen Görevler</h3>
@@ -14,7 +14,7 @@
                     if (element.gorevDurumu === 'bekleyen') {
 
                     %>
-                    <div draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd()" class="card text-white bg-primary mb-3 shadow-lg">
+                    <div id="<%= element.gorevID %>" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd()" class="card text-white bg-primary mb-3 shadow-lg">
                         <div class="card-header">
                             <%= element.gorevID %>
                         </div>
@@ -42,7 +42,7 @@
                     if (element.gorevDurumu === 'devamEden') {
 
                     %>
-                    <div class="card text-white bg-warning mb-3 shadow-lg">
+                    <div id="<%= element.gorevID %>" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd()" class="card text-white bg-warning mb-3 shadow-lg">
                         <div class="card-header">
                             <%= element.gorevID %>
                         </div>
@@ -70,7 +70,7 @@
                     if (element.gorevDurumu === 'tamamlanan') {
 
                     %>
-                    <div class="card text-white bg-success mb-3 shadow-lg">
+                    <div id="<%= element.gorevID %>" draggable="true" ondragstart="dragStart(event)" ondragend="dragEnd()" class="card text-white bg-success mb-3 shadow-lg">
                         <div class="card-header">
                             <%= element.gorevID %>
                         </div>
