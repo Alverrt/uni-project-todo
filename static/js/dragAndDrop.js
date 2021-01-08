@@ -4,6 +4,33 @@ var tamamlananBolumu = $('#tamamlanan');
 var dragCover = $('.dragCover');
 
 var draggedElement;
+var IDofParent;
+
+function changeColor(statusID, element) {
+    switch (statusID) {
+        case 'beklemede':
+            $(element).addClass("bg-primary");
+            break;
+        case 'devamEden':
+            $(element).addClass("bg-warning");
+            break;
+        case 'tamamlanan':
+            $(element).addClass("bg-success");
+            break;
+
+        default:
+            break;
+    }
+}
+
+function deleteColor(el) {
+    for (let i = el.classList.length - 1; i >= 0; i--) {
+        const className = el.classList[i];
+        if (className.startsWith('bg')) {
+            el.classList.remove(className);
+        }
+    }
+}
 
 function dragStart(event) {
     bekleyenBolumu.css('position', 'relative');
@@ -33,5 +60,8 @@ function dragLeave(event) {
 }
 
 function dropped(event) {
-    console.log(event.target);
+    event.target.before(draggedElement);
+    deleteColor(draggedElement);
+    IDofParent = $(event.target).parent().attr("id")
+    changeColor(IDofParent, draggedElement);
 }
