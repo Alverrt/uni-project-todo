@@ -1,4 +1,4 @@
-var bekleyenBolumu = $('#beklemede');
+var bekleyenBolumu = $('#bekleyen');
 var devamEdenBolumu = $('#devamEden');
 var tamamlananBolumu = $('#tamamlanan');
 var dragCover = $('.dragCover');
@@ -18,7 +18,7 @@ async function submitAndClear() {
 
 function changeColor(statusID, element) {
     switch (statusID) {
-        case 'beklemede':
+        case 'bekleyen':
             $(element).addClass("bg-primary");
             break;
         case 'devamEden':

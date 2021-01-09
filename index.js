@@ -227,9 +227,9 @@ app.get('/', (req, res) => {
 app.post('/login', function (req, res) {
   if (authenticate(req.body)) {
     const gorevJSON = gorevler(req.body.username)
-    res.render('./gorevlerim/index.ejs', { gorevJSON })
     session.pop()
     session.push(gorevJSON[0].user)
+    res.redirect('/dashboard');
   } else {
     res.send('buraya hata mesaji gelecek')
   }
@@ -243,8 +243,12 @@ app.post('/gorevekle', (req, res) => {
   req.body.baslangic = fixDate(req.body.baslangic)
   req.body.bitis = fixDate(req.body.bitis)
   gorevEkle(session[0], req.body)
+  res.redirect('/dashboard');
+})
+
+app.get('/dashboard', (req, res) => {
   let lowercase = session[0].toLowerCase()
-  const gorevJSON = gorevler(lowercase)
+  let gorevJSON = gorevler(lowercase)
   res.render('./gorevlerim/index.ejs', { gorevJSON })
 })
 

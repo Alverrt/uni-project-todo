@@ -46,7 +46,7 @@
                         <div class="mb-2">
                             <label for="message-text" class="col-form-label">Görev Durumu:</label>
                             <select class="form-select" name="durum" aria-label="Default select example">
-                                <option value="beklemede">Beklemede</option>
+                                <option value="bekleyen">Beklemede</option>
                                 <option value="devamEden">Devam Ediyor</option>
                                 <option value="tamamlanan">Tamamlandı</option>
                             </select>
@@ -66,7 +66,7 @@
     <!-- GOREV EKLE BOLUMU BITTI -->
     <%- include('../navbar.ejs', { user: gorevJSON[0].user }) %>
         <div class="container-fluid row mt-2">
-            <div id="beklemede" class="col-lg-4">
+            <div id="bekleyen" class="col-lg-4">
                 <h3 class="text-center my-4">Bekleyen Görevler</h3>
                 <% gorevJSON.forEach(element=> {
                     if (element.gorevDurumu === 'bekleyen') {
