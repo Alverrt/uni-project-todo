@@ -9,7 +9,9 @@
     <div class="d-flex flex-column justify-content-center align-items-center container h-100">
         <img width="250px" src="img/Node.js_logo.svg" alt="nodejs">
         <h2 class="py-5 text-center">NodeJS TO-DO App for School Project</h2>
-        <%- include('./loginForm.ejs') %>
+        <p class="text-center">Batuhan Birkan - 190601046</p>
+        <p class="py-3 text-center">NOT: Hocam bu ödevde yeni şeyler denedim. Tarayıcı uyumluluğu Firefox'da düzgün çalışıyor. Chrome'da test etme fırsatım olmadı. Sağlıklı günler.</p>
+        <%- include('./loginForm.ejs', { loginError: isError }) %>
     </div>
 </body>
 

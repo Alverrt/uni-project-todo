@@ -7,26 +7,6 @@ var responsiveDropdowns = $('.dropdown')
 var draggedElement;
 var IDofParent;
 
-jQuery(()=> {
-    responsiveButton();
-})
-
-addEventListener('resize', () => {
-    let vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
-    if (vw > 992) {
-        $(responsiveDropdowns).css('display', 'none')
-    } else {
-        $(responsiveDropdowns).css('display', 'block')
-    }
-})
-
- function responsiveButton() {
-     const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
-     if (vw > 992) {
-         $(responsiveDropdowns).css('display', 'none')
-     }
- }
-
 
 
 function submitAndClear() {

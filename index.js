@@ -221,7 +221,7 @@ const session = []
 
 app.get('/', (req, res) => {
   session.pop()
-  res.render('index')
+  res.render('index', {isError: false})
 })
 
 app.post('/login', function (req, res) {
@@ -231,7 +231,7 @@ app.post('/login', function (req, res) {
     session.push(gorevJSON[0].user)
     res.redirect('/dashboard');
   } else {
-    res.send('buraya hata mesaji gelecek')
+    res.render('index', {isError: true})
   }
 })
 app.post('/update', function (req, res) {
@@ -239,7 +239,6 @@ app.post('/update', function (req, res) {
 })
 
 app.post('/gorevekle', (req, res) => {
-  console.log(req.body.baslangic)
   req.body.baslangic = fixDate(req.body.baslangic)
   req.body.bitis = fixDate(req.body.bitis)
   gorevEkle(session[0], req.body)
