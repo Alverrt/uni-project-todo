@@ -2,11 +2,34 @@ var bekleyenBolumu = $('#bekleyen');
 var devamEdenBolumu = $('#devamEden');
 var tamamlananBolumu = $('#tamamlanan');
 var dragCover = $('.dragCover');
+var responsiveDropdowns = $('.dropdown')
 
 var draggedElement;
 var IDofParent;
 
-async function submitAndClear() {
+jQuery(()=> {
+    responsiveButton();
+})
+
+addEventListener('resize', () => {
+    let vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+    if (vw > 992) {
+        $(responsiveDropdowns).css('display', 'none')
+    } else {
+        $(responsiveDropdowns).css('display', 'block')
+    }
+})
+
+ function responsiveButton() {
+     const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+     if (vw > 992) {
+         $(responsiveDropdowns).css('display', 'none')
+     }
+ }
+
+
+
+function submitAndClear() {
 
     $('#gorevForm').submit()
 
@@ -35,10 +58,10 @@ function changeColor(statusID, element) {
 
 function updateStatus(status, gorevID) {
     $.post("/update",
-  {
-    status: status,
-    gorevID: gorevID
-  });
+        {
+            status: status,
+            gorevID: gorevID
+        });
 }
 
 function deleteColor(el) {
