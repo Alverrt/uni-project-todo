@@ -8,7 +8,6 @@ var draggedElement;
 var IDofParent;
 
 
-
 function submitAndClear() {
 
     $('#gorevForm').submit()
@@ -93,3 +92,54 @@ function dropped(event) {
     changeColor(IDofParent, draggedElement);
     updateStatus(IDofParent, gorevID);
 }
+
+// ----------------------------------MOBILE SIDE --------------------------------------------------------
+
+    const cards = document.getElementsByClassName('card');
+    const statusbox = document.getElementById('statusbox');
+
+    const statusboxBekle = document.getElementById('bekle');
+    const statusboxDevam = document.getElementById('devamEt');
+    const statusboxTamamla = document.getElementById('tamamla');
+
+    let gorevIDMobile;
+    let clickedElement
+
+    const mobileChangeStatus = (e) => {
+        statusbox.style.display = 'block';
+        statusbox.style.left = e.pageX + 20;
+        statusbox.style.top = e.pageY - 5;
+
+        const gorevID = $(e.target).parents('.card').attr('id');
+        gorevIDMobile = gorevID;
+        clickedElement = e.target.closest('.card');
+    }
+
+    for (let i = 0; i < cards.length; i++) {
+        cards[i].addEventListener('click', mobileChangeStatus);
+    }
+
+    statusboxBekle.addEventListener('click', () => {
+        statusbox.style.display = 'none';
+        document.getElementById('bekleyen').append(clickedElement)
+        deleteColor(clickedElement);
+        changeColor('bekleyen', clickedElement);
+        updateStatus('bekleyen', gorevIDMobile);
+    })
+
+    statusboxDevam.addEventListener('click', () => {
+        statusbox.style.display = 'none';
+        document.getElementById('devamEden').append(clickedElement);
+        deleteColor(clickedElement);
+        changeColor('devamEden', clickedElement);
+        updateStatus('devamEden', gorevIDMobile);
+    })
+
+    statusboxTamamla.addEventListener('click', () => {
+        statusbox.style.display = 'none';
+        document.getElementById('tamamlanan').append(clickedElement);
+        deleteColor(clickedElement);
+        changeColor('tamamlanan', clickedElement);
+        updateStatus('tamamlanan', gorevIDMobile);
+    })
+
